@@ -1,11 +1,14 @@
 package com.example.time_tracker;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -13,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ListView;
@@ -27,10 +31,13 @@ import java.util.concurrent.TimeUnit;
 public class piec_fragment extends Fragment {
 
 Cursor cursor;
+Dialog dialog;
+    piece_adapter piece_adapter;
 boolean add = false , all= true  , bool_startdate = false , bool_enddate = false;
     SimpleDateFormat simple_timeformat;
     Button start_date_time , end_date_time , all_date_time;
     SQLiteDatabase database;
+    boolean scrool_true = true;
 
     Calendar calendar , calendar_end;
     Date time_start_convert , time_start , time_end;
@@ -75,6 +82,17 @@ boolean add = false , all= true  , bool_startdate = false , bool_enddate = false
         get_data_day();
         get_data_all();
         get_adapter();
+
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                adapter_piece_adapter adapter_piece_adapter = new adapter_piece_adapter(piece_adapter.context ,piece_adapter.name_array.get(i) ,piece_adapter.icon_array.get(i) ,piece_adapter.total_array.get(i));
+              get_structur_artel(adapter_piece_adapter);
+
+            }
+        });
 
 
         start_date_time.setOnClickListener(new View.OnClickListener() {
@@ -265,7 +283,7 @@ boolean add = false , all= true  , bool_startdate = false , bool_enddate = false
     }
 
     public  void  get_adapter(){
-        piece_adapter piece_adapter  = new piece_adapter(getActivity() ,name_array ,icon_array , total_array,time_araliq);
+         piece_adapter  = new piece_adapter(getActivity() ,name_array ,icon_array , total_array,time_araliq);
         listView.setAdapter(piece_adapter);
     }
 
@@ -318,5 +336,24 @@ boolean add = false , all= true  , bool_startdate = false , bool_enddate = false
                 }
             }
         }
+    }
+
+    public void get_structur_artel(adapter_piece_adapter adapter ){
+        dialog = new Dialog(getActivity());
+        dialog.setContentView(R.layout.structor_artel);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setCancelable(false);
+        dialog.show();
+        Button dialog_btn = dialog.findViewById(R.id.structor_exit_btn);
+        ListView listView = dialog.findViewById(R.id.structor_listview);
+        dialog_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
+        listView.setAdapter(adapter);
+
     }
 }

@@ -93,7 +93,7 @@ Dialog dialog;
         img_clock = v.findViewById(R.id.img_clock);
         img_chhese = v.findViewById(R.id.img_chese);
         img_hat = v.findViewById(R.id.img_hat);
-        navigationView = v.findViewById(R.id.bottomNavigationView);
+//        navigationView = v.findViewById(R.id.bottomNavigationView);
 
         time_text = v.findViewById(R.id.time_text);
         add_image_icon = v.findViewById(R.id.add_image_icon);

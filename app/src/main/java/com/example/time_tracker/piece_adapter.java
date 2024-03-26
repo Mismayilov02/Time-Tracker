@@ -18,10 +18,11 @@ import java.util.ArrayList;
 
 public class piece_adapter extends ArrayAdapter<String> {
 
-    ArrayList<ArrayList> name_array = new ArrayList<>();
-    ArrayList<ArrayList> icon_array = new ArrayList<>();
-    ArrayList<ArrayList> total_array = new ArrayList<>();
-    ArrayList<String>time_araliq = new ArrayList<>();
+  public   ArrayList<ArrayList> name_array = new ArrayList<>();
+    public  ArrayList<ArrayList> icon_array = new ArrayList<>();
+   public ArrayList<ArrayList> total_array = new ArrayList<>();
+  public   ArrayList<String>time_araliq = new ArrayList<>();
+   public adapter_piece_adapter adapter_piece_adapter;
     Context context;
 
     public   piece_adapter(Context context , ArrayList<ArrayList>name_array , ArrayList<ArrayList> icon_array , ArrayList<ArrayList> total_array , ArrayList<String> time_araliq){
@@ -40,11 +41,11 @@ public class piece_adapter extends ArrayAdapter<String> {
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         View v =  LayoutInflater.from(context).inflate(R.layout.data_design , null);
 
-        ListView data_design_list = v.findViewById(R.id.all_listview_v);
+      //  ListView data_design_list = v.findViewById(R.id.all_listview_v);
         TextView data_text = v.findViewById(R.id.data_text);
 
-       adapter_piece_adapter adapter_piece_adapter = new adapter_piece_adapter(context ,name_array.get(position) ,icon_array.get(position) ,total_array.get(position));
-        data_design_list.setAdapter(adapter_piece_adapter);
+       // adapter_piece_adapter = new adapter_piece_adapter(context ,name_array.get(position) ,icon_array.get(position) ,total_array.get(position));
+        //data_design_list.setAdapter(adapter_piece_adapter);
         data_text.setText(time_araliq.get(position));
 
 

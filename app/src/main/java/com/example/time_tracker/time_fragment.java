@@ -191,7 +191,7 @@ public class time_fragment extends Fragment {
 
                          }
                      };
-                     handler.postDelayed(runnable, 1000);
+                     handler.postDelayed(runnable, 0);
 
                  }else {
                      get_runmax_dialog();
@@ -235,7 +235,7 @@ public class time_fragment extends Fragment {
                         adapter_all();
                         run_listview_animation();
                     }
-                };handler.postDelayed(runnable , 1000);
+                };handler.postDelayed(runnable , 0);
             }
         });
 
